@@ -25,11 +25,19 @@ public class BuddyInfo {
 	}
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		BuddyInfo info = new BuddyInfo(); 
+		BuddyInfo info;
+		AddressBook book = new AddressBook();
+		info = new BuddyInfo();
+		
 		info.setFirstName("Thompson");
 		info.setLastName("Stubbs");
-		System.out.println("Hello "+info.getFirstName());
+		book.addBuddy(info);
+		
+		info.setFirstName("Dude");
+		info.setLastName("Guy");
+		book.addBuddy(info);
+		
+		System.out.println("Hello "+book.getBuddy("Thompson").getFirstName());
 	}
 
 }
