@@ -18,6 +18,7 @@ public class AddressBook {
 	}
 	
 	public BuddyInfo getBuddy(String firstName) {
+		//Editing on GITHub
 		for (BuddyInfo b : people) {
 			if (b.getFirstName().equals(firstName)) {
 				return b;
