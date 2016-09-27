@@ -3,24 +3,28 @@ package cool;
 public class BuddyInfo {
 	private String firstName;
 	private String lastName;
-	BuddyInfo() {
-		firstName = new String();
-		lastName = new String();
+	public BuddyInfo() {
+		this(new String(), new String());
 	}
 	
-	void setFirstName(String name) {
+	public BuddyInfo(String first, String last) {
+		firstName = first;
+		lastName = last;
+	}
+	
+	public void setFirstName(String name) {
 		firstName = name;
 	}
 	
-	String getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 	
-	void setLastName(String name) {
+	public void setLastName(String name) {
 		lastName = name;
 	}
 	
-	String getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 	
