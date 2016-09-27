@@ -6,7 +6,7 @@ import java.util.List;
 public class AddressBook {
 	private List<BuddyInfo> people;
 	public AddressBook() {
-		List<BuddyInfo> people = new ArrayList<BuddyInfo>();
+		people = new ArrayList<BuddyInfo>();
 	}
 	
 	public boolean addBuddy(BuddyInfo guy) {
