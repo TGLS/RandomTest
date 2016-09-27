@@ -37,7 +37,12 @@ public class BuddyInfo {
 		info.setLastName("Guy");
 		book.addBuddy(info);
 		
+		info.setFirstName("A");
+		info.setLastName("Change");
+		book.addBuddy(info);
+		
 		System.out.println("Hello "+book.getBuddy("Thompson").getFirstName());
+		System.out.println("Hello "+book.getBuddy("A").getFirstName());
 	}
 
 }
