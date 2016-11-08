@@ -3,27 +3,52 @@ package cool;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressBook {
+import javax.swing.AbstractListModel;
+
+public class AddressBook extends AbstractListModel<BuddyInfo> {
 	private List<BuddyInfo> people;
+	
 	public AddressBook() {
+		super();
 		people = new ArrayList<BuddyInfo>();
 	}
 	
-	public boolean addBuddy(BuddyInfo guy) {
-		return people.add(guy);
-	}
-	
-	public boolean removeBuddy(BuddyInfo guy) {
-		return people.remove(guy);
-	}
-	
-	public BuddyInfo getBuddy(String firstName) {
-		//Editing on GITHub
-		for (BuddyInfo b : people) {
-			if (b.getFirstName().equals(firstName)) {
-				return b;
-			}
+	public void addBuddy(BuddyInfo guy) {
+		if (people.add(guy)) {
+			fireIntervalAdded(this, people.size(), people.size());
 		}
-		return null;
+	}
+	
+	public void removeBuddy(BuddyInfo guy) {
+		int index = people.indexOf(guy);
+		if (people.remove(guy)) {
+			fireIntervalRemoved(this, index, index);
+		}
+	}
+	
+	public void removeAllBuddys() {
+		int index = people.size() - 1;
+		people.removeAll(people);
+		if (index >= 0) {
+			fireIntervalRemoved(this, 0, index);
+		}
+	}
+	
+	public String saveBook() {
+		String retVal = new String();
+		for (BuddyInfo b : people) {
+			retVal += b.toString() + System.getProperty("line.separator");
+		}
+		return retVal;
+	}
+
+	@Override
+	public BuddyInfo getElementAt(int arg0) {
+		return people.get(arg0);
+	}
+
+	@Override
+	public int getSize() {
+		return people.size();
 	}
 }

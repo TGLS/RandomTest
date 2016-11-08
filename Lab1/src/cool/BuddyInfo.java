@@ -3,13 +3,20 @@ package cool;
 public class BuddyInfo {
 	private String firstName;
 	private String lastName;
+	private int age;
 	public BuddyInfo() {
 		this(new String(), new String());
+	}
+	
+	public BuddyInfo(BuddyInfo old) {
+		this(old.firstName, old.lastName);
+		this.setAge(old.getAge());
 	}
 	
 	public BuddyInfo(String first, String last) {
 		firstName = first;
 		lastName = last;
+		setAge(0);
 	}
 	
 	public void setFirstName(String name) {
@@ -28,25 +35,29 @@ public class BuddyInfo {
 		return lastName;
 	}
 	
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
+	public boolean isOver18() {
+		return (age > 18);
+	}
+
+	@Override
+	public String toString() {
+		return (firstName + " " + lastName);
+	}
+	
+	public String greeting() {
+		return ("Hello, " + firstName);
+	}
+	
 	public static void main(String[] args) {
-		BuddyInfo info;
-		AddressBook book = new AddressBook();
-		info = new BuddyInfo();
-		
-		info.setFirstName("Thompson");
-		info.setLastName("Stubbs");
-		book.addBuddy(info);
-		
-		info.setFirstName("Dude");
-		info.setLastName("Guy");
-		book.addBuddy(info);
-		
-		info.setFirstName("A");
-		info.setLastName("Change");
-		book.addBuddy(info);
-		
-		System.out.println("Hello "+book.getBuddy("Thompson").getFirstName());
-		System.out.println("Hello "+book.getBuddy("A").getFirstName());
+		new GUI().run();
 	}
 
 }
