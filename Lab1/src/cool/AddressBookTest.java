@@ -110,4 +110,45 @@ public class AddressBookTest {
 		book.addBuddy(luigi);
 		assertTrue(fake.compareTo(book.saveBook()) == 0);
 	}
+	
+	@Test
+	public void testImporterExporter() {
+		BuddyInfo mario = new BuddyInfo("Mario","Mario");
+		BuddyInfo luigi = new BuddyInfo("Luigi","Mario");
+		book.addBuddy(mario);
+		book.addBuddy(luigi);
+		book.exporter("RandomTest");
+		AddressBook otherBook = new AddressBook();
+		otherBook.importer("RandomTest");
+		
+		assertTrue(otherBook.getSize() == book.getSize());
+		assertTrue(otherBook.getElementAt(0).getFirstName().compareTo(book.getElementAt(0).getFirstName()) == 0);
+		assertTrue(otherBook.getElementAt(1).getFirstName().compareTo(book.getElementAt(1).getFirstName()) == 0);
+		
+		assertTrue(otherBook.getElementAt(0).getLastName().compareTo(book.getElementAt(0).getLastName()) == 0);
+		assertTrue(otherBook.getElementAt(1).getLastName().compareTo(book.getElementAt(1).getLastName()) == 0);
+		
+		assertTrue(otherBook.getElementAt(0).getAge() == book.getElementAt(0).getAge());
+		assertTrue(otherBook.getElementAt(1).getAge() == book.getElementAt(1).getAge());
+	}
+	
+	@Test
+	public void testStreamImporterExporter() {
+		BuddyInfo mario = new BuddyInfo("Mario","Mario");
+		BuddyInfo luigi = new BuddyInfo("Luigi","Mario");
+		book.addBuddy(mario);
+		book.addBuddy(luigi);
+		book.streamExporter("OtherTest");
+		AddressBook otherBook = AddressBook.streamImporter("OtherTest");
+		
+		assertTrue(otherBook.getSize() == book.getSize());
+		assertTrue(otherBook.getElementAt(0).getFirstName().compareTo(book.getElementAt(0).getFirstName()) == 0);
+		assertTrue(otherBook.getElementAt(1).getFirstName().compareTo(book.getElementAt(1).getFirstName()) == 0);
+		
+		assertTrue(otherBook.getElementAt(0).getLastName().compareTo(book.getElementAt(0).getLastName()) == 0);
+		assertTrue(otherBook.getElementAt(1).getLastName().compareTo(book.getElementAt(1).getLastName()) == 0);
+		
+		assertTrue(otherBook.getElementAt(0).getAge() == book.getElementAt(0).getAge());
+		assertTrue(otherBook.getElementAt(1).getAge() == book.getElementAt(1).getAge());
+	}
 }

@@ -1,9 +1,5 @@
 package cool;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -27,14 +23,8 @@ public class AddressController {
 	}
 	
 	public void saveAddressBook() {
-		try {
-			String fName = JOptionPane.showInputDialog("Enter File Name (No Extension)");
-			BufferedWriter out = new BufferedWriter(new FileWriter(fName+".txt"));
-			out.write(getBook().saveBook());
-			out.close();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		String fName = JOptionPane.showInputDialog("Enter File Name (No Extension)");
+		getBook().exporter(fName);
 	}
 	
 	public void addBuddy(String fName, String lName) {

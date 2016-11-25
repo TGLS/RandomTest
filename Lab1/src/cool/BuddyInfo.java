@@ -1,6 +1,13 @@
 package cool;
 
-public class BuddyInfo {
+import java.io.Serializable;
+import java.util.Scanner;
+
+public class BuddyInfo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4524399552824098570L;
 	private String firstName;
 	private String lastName;
 	private int age;
@@ -49,7 +56,7 @@ public class BuddyInfo {
 
 	@Override
 	public String toString() {
-		return (firstName + " " + lastName);
+		return (firstName + ";" + lastName + ";" + age);
 	}
 	
 	public String greeting() {
@@ -57,7 +64,45 @@ public class BuddyInfo {
 	}
 	
 	public static void main(String[] args) {
-		new GUI().run();
+		AddressBook book = new AddressBook();
+		BuddyInfo guy = new BuddyInfo("Some","Guy");
+		guy.setAge(28);
+		book.addBuddy(guy);
+		guy = new BuddyInfo("Other","Guy");
+		guy.setAge(18);
+		book.addBuddy(guy);
+		guy = new BuddyInfo("Some","Dude");
+		guy.setAge(35);
+		book.addBuddy(guy);
+		guy = new BuddyInfo("Random","Dude");
+		guy.setAge(32);
+		book.addBuddy(guy);
+		//book.exporter("things.txt");
+		System.out.println(book.getSize());
+		book = new AddressBook();
+		book.importer("things.txt");
+		System.out.println(book.getSize());
 	}
 
+	public static BuddyInfo importer(String input) {
+		BuddyInfo retVal = new BuddyInfo();
+		String firstBuffer, lastBuffer, ageBuffer;
+		Scanner tokenizer = new Scanner(input).useDelimiter(";");
+		if (!tokenizer.hasNext()) {
+			return null;
+		}
+		firstBuffer = tokenizer.next();
+		retVal.setFirstName(firstBuffer);
+		if (!tokenizer.hasNext()) {
+			return null;
+		}
+		lastBuffer = tokenizer.next();
+		retVal.setLastName(lastBuffer);
+		if (!tokenizer.hasNext()) {
+			return null;
+		}
+		ageBuffer = tokenizer.next();
+		retVal.setAge(Integer.parseInt(ageBuffer));
+		return retVal;
+	}
 }
